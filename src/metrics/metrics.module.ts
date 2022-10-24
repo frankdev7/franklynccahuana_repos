@@ -1,0 +1,12 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Metric } from './metric.entity';
+import { MetricsController } from './metrics.controller';
+import { MetricsService } from './metrics.service';
+
+@Module({
+  imports: [TypeOrmModule.forFeature([Metric])],
+  controllers: [MetricsController],
+  providers: [MetricsService]
+})
+export class MetricsModule {}

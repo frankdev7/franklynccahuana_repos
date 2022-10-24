@@ -1,3 +1,4 @@
+import { Tribe } from "src/tribes/tribe.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -10,4 +11,7 @@ export class Company {
   
   @Column()
   status: number;
+
+  @OneToMany(() => Tribe, tribe => tribe.companyId)
+  tribes: Tribe[];
 }
