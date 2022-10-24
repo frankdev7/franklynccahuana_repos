@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RepositoriesModule } from './repositories/repositories.module';
+import { CompaniesModule } from './companies/companies.module';
+import { Company } from './companies/company.entity';
 
 @Module({
   imports: [
@@ -13,13 +15,14 @@ import { RepositoriesModule } from './repositories/repositories.module';
       username: 'frank',
       password: 'vtKMCCciF6pzLeleX4kMDw',
       database: 'phased-fowl-3434.defaultdb',
-      entities: [],
+      entities: [Company],
       synchronize: true,
       extra: {
         ssl: true
       }
     }),
     RepositoriesModule,
+    CompaniesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
