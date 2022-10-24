@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Company } from 'src/companies/company.entity';
 import { Repo } from 'src/repos/repos.entity';
@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 import { RepositoryDto } from './dto/repository.dto';
 import { TribeDto } from './dto/tribe.dto';
 import { Tribe } from './tribe.entity';
-
+import { RepositoriesService } from 'src/repositories/repositories.service';
 @Injectable()
 export class TribesService {
   constructor(
@@ -17,6 +17,7 @@ export class TribesService {
     private readonly companyRepository: Repository<Company>,
     @InjectRepository(Repo)
     private readonly repoRepository: Repository<Repo>,
+    @Inject(RepositoriesService) private readonly repositoriesService: RepositoriesService,
   ) { }
 
   async getReposByTribeId(id: string): Promise<TribeDto> {
@@ -40,12 +41,14 @@ export class TribesService {
 
     let tribeDto = new TribeDto();
     let repositoriesDto = new Array<RepositoryDto>();
-    repos.forEach(repo =>
+    repos.forEach( repo => {
+      //let status = await this.repositoriesService.getStatus(repo.status);
       repositoriesDto.push(new RepositoryDto(repo.id, repo.name,
         tribe.name, company.name,
         repo.metricId.coverage + "%", repo.metricId.codeSmell,
         repo.metricId.bugs, repo.metricId.vulnerabilities,
-        repo.metricId.hotspot, ""))
+        repo.metricId.hotspot, repo.status))
+    }
     );
 
     if (repositoriesDto.length === 0)
