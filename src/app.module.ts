@@ -11,6 +11,7 @@ import { MetricsModule } from './metrics/metrics.module';
 import { Tribe } from './tribes/tribe.entity';
 import { Repo } from './repos/repos.entity';
 import { Metric } from './metrics/metric.entity';
+import { CsvModule } from './csv/csv.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { Metric } from './metrics/metric.entity';
     TribesModule,
     ReposModule,
     MetricsModule,
+    CsvModule,
   ],
   controllers: [AppController],
   providers: [AppService],
