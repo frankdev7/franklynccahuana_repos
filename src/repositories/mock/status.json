@@ -1,0 +1,16 @@
+{
+  "status": [
+    {
+      "cod": "E",
+      "desc": "Enable"
+    },
+    {
+      "cod": "D",
+      "desc": "Disable"
+    },
+    {
+      "cod": "A",
+      "desc": "Archived"
+    }
+  ]
+}
